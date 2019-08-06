@@ -5,32 +5,70 @@ module.exports = {
     markdown: {
         lineNumbers: true
     },
+    locales: {
+        '/guide/': {
+            lang: 'en-US',
+            title: 'VuePress',
+            description: 'Vue-powered Static Site Generator'
+        }
+    },
+    serviceWorker: true,
     themeConfig: {
-        sidebarDepth: 1,
+        sidebarDepth: 2,
         navbar: true,
         logo: "/img/Logo Type 1.png",
         displayAllHeaders: true,
-        nav: [
-            { text: 'Home', link: '/' },
-            { text: 'Guide', link: '/guide/' },
-            { text: 'External', link: 'https://google.com' }
-            // For use with different languages
-            /* {
-                text: 'Languages',
-                items: [
-                  { text: 'Chinese', link: '/language/chinese' },
-                  { text: 'Japanese', link: '/language/japanese' }
-                ]
-            } */
-        ],
-        sidebar: {
-            "/": [
-                ""
-            ],
-            '/guide/*': [
-                "",
-                "MoreInformations.md"
-            ]
-        }   
+        locales: {
+            '/guide/': {
+                label: 'English',
+                selectText: 'Languages',
+                editLinkText: 'Edit this page on GitHub',
+                lastUpdated: 'Last Updated',
+                serviceWorker: {
+                    updatePopup: {
+                        message: "New content is available.",
+                        buttonText: "Refresh"
+                    }
+                },
+                nav: [{
+                        text: 'Guide',
+                        link: '/guide/',
+                    },
+                    {
+                        text: 'Config Reference',
+                        link: '/config/'
+                    },
+                    {
+                        text: 'Default Theme Config',
+                        link: '/default-theme-config/'
+                    },
+                    {
+                        text: 'Changelog',
+                        link: 'https://github.com/vuejs/vuepress/blob/0.x/CHANGELOG.md'
+                    },
+                    {
+                        text: '1.x',
+                        link: 'https://v1.vuepress.vuejs.org/'
+                    },
+                ],
+                sidebar: {
+                    '/guide/': genSidebarConfig('Guide')
+                }
+            }
+        }
     }
 };
+
+
+
+
+function genSidebarConfig(title) {
+    return [{
+        title,
+        collapsable: false,
+        children: [
+            '',
+            'MoreInformations'
+        ]
+    }]
+}
